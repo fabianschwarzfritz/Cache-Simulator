@@ -10,7 +10,7 @@ public class NoCache extends Cache {
     private String name;
 
     public NoCache(final Storeable<Key, Value> backgroundStorage, final String name) {
-        super(null, backgroundStorage);
+        super(null, backgroundStorage, name);
         this.name = name;
     }
 
