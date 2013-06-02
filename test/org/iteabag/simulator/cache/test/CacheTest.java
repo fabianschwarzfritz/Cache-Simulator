@@ -28,16 +28,17 @@ public class CacheTest {
     private static final Integer MAX_KEY = new Integer(100);
 
     private Cache randomCache;
+    private Cache lruCache;
     private Cache noCache;
 
     public CacheTest() {
-        Storeable<Key, Value> randomCache = createFastStoreage(CACHE_SIZE, "faststorage1");
+        Storeable<Key, Value> randomRAM = createFastStoreage(CACHE_SIZE, "faststorage1");
         Storeable<Key, Value> harddiskRandom = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk1");
-        randomCache = CacheFactory.randomCache(randomCache, harddiskRandom, "randomcache");
+        randomCache = CacheFactory.randomCache(randomRAM, harddiskRandom, "randomcache");
 
-        Storeable<Key, Value> lruCache = createFastStoreage(CACHE_SIZE, "faststorage2");
+        Storeable<Key, Value> lruRAM = createFastStoreage(CACHE_SIZE, "faststorage2");
         Storeable<Key, Value> harddiskLRU = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk1");
-        randomCache = CacheFactory.lruCache(lruCache, harddiskLRU, "lrucache");
+        lruCache = CacheFactory.lruCache(lruRAM, harddiskLRU, "lrucache");
 
         Storeable<Key, Value> harddiskNoCache = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk2");
         noCache = new NoCache(harddiskNoCache, "nocache");
@@ -55,6 +56,7 @@ public class CacheTest {
     public void test() {
         testCache(noCache);
         testCache(randomCache);
+        testCache(lruCache);
     }
 
     public void testCache(final Cache cache) {
