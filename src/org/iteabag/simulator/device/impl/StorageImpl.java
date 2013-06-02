@@ -20,7 +20,6 @@ public class StorageImpl<K, V> implements Storeable<Key, Value> {
     }
 
     public Value get(Key key) {
-        System.out.println(getName() + "Get " + key);
         return storage.get(key);
     }
 
@@ -30,13 +29,11 @@ public class StorageImpl<K, V> implements Storeable<Key, Value> {
 
     @Override
     public void remove(Key integer) {
-        System.out.println(getName() + "Remove " + integer);
         storage.remove(integer);
     }
 
     @Override
     public Key put(Key key, Value value) {
-        System.out.println(getName() + ": Put " + key + " with value " + value);
         storage.put(key, value);
         return key;
     }

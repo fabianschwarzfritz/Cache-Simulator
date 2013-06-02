@@ -28,7 +28,6 @@ public class RandomCache extends Cache {
 
     @Override
     public synchronized Value get(Key key) {
-        System.out.println(getName() + " Get " + key);
         Value value = cacheStorage.get(key);
         if (value == null) {
             miss.addAndGet(1);
@@ -40,19 +39,16 @@ public class RandomCache extends Cache {
 
     @Override
     public synchronized void remove(Key key) {
-        System.out.println(getName() + " Remove" + key);
         cacheStorage.remove(key);
         backgroundStorage.remove(key);
     }
 
     @Override
     public synchronized Key put(Key key, Value value) {
-        System.out.println(getName() + ": Put" + key + " with value " + value);
         backgroundStorage.put(key, value);
         try {
             cacheStorage.put(key, value);
         } catch (StoreageFullException exeption) {
-            System.out.println("supressiong");
             supress();
             cacheStorage.put(key, value);
         }

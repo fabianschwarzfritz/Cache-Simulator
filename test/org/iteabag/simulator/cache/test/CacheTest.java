@@ -18,14 +18,14 @@ import org.junit.Test;
 
 public class CacheTest {
 
-    private static final Integer CACHE_SIZE = new Integer(100);
-    private static final Integer READ_TIMES = new Integer(1000);
-    private static final Integer WRITE_TIMES = new Integer(100);
+    private static final Integer CACHE_SIZE = new Integer(10);
+    private static final Integer READ_TIMES = new Integer(100);
+    private static final Integer WRITE_TIMES = new Integer(10);
 
     private static final Time WRITE_TIME_DISK = new Time(100);
     private static final Time READ_TIME_DISK = new Time(100);
 
-    private static final Integer MAX_KEY = new Integer(1000);
+    private static final Integer MAX_KEY = new Integer(100);
 
     private Cache randomCache;
     private Cache noCache;

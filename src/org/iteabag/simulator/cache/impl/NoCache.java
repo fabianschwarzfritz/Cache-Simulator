@@ -16,13 +16,11 @@ public class NoCache extends Cache {
 
     @Override
     public synchronized Value get(Key key) {
-        System.out.println(getName() + " Get " + key);
         return backgroundStorage.get(key);
     }
 
     @Override
     public synchronized void remove(Key key) {
-        System.out.println(getName() + " Remove" + key);
         backgroundStorage.remove(key);
     }
 
