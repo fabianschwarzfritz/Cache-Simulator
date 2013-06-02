@@ -31,12 +31,16 @@ public class CacheTest {
     private Cache noCache;
 
     public CacheTest() {
-        Storeable<Key, Value> cache = createFastStoreage(CACHE_SIZE, "faststorage");
-        Storeable<Key, Value> harddisk = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk");
-        randomCache = CacheFactory.randomCache(cache, harddisk, "randomcache");
+        Storeable<Key, Value> randomCache = createFastStoreage(CACHE_SIZE, "faststorage1");
+        Storeable<Key, Value> harddiskRandom = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk1");
+        randomCache = CacheFactory.randomCache(randomCache, harddiskRandom, "randomcache");
 
-        Storeable<Key, Value> harddisk2 = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk");
-        noCache = new NoCache(harddisk2, "nocache");
+        Storeable<Key, Value> lruCache = createFastStoreage(CACHE_SIZE, "faststorage2");
+        Storeable<Key, Value> harddiskLRU = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk1");
+        randomCache = CacheFactory.lruCache(lruCache, harddiskLRU, "lrucache");
+
+        Storeable<Key, Value> harddiskNoCache = createHarddisk(WRITE_TIME_DISK, READ_TIME_DISK, "harddisk2");
+        noCache = new NoCache(harddiskNoCache, "nocache");
     }
 
     private Storeable<Key, Value> createHarddisk(Time writeTime, Time readTime, String name) {
