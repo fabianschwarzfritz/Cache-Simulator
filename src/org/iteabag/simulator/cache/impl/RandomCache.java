@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.iteabag.simulator.cache.Storeable;
 import org.iteabag.simulator.cache.key.Key;
@@ -14,16 +13,9 @@ import org.iteabag.simulator.device.impl.StoreageFullException;
 
 public class RandomCache extends Cache {
 
-    private AtomicInteger miss;
-    private AtomicInteger hit;
-    private String name;
-
     public RandomCache(final Storeable<Key, Value> cacheStorage, final Storeable<Key, Value> backgroundStorage,
             final String name) {
-        super(cacheStorage, backgroundStorage);
-        this.name = name;
-        miss = new AtomicInteger(0);
-        hit = new AtomicInteger(0);
+        super(cacheStorage, backgroundStorage, name);
     }
 
     @Override
